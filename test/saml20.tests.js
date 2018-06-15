@@ -28,7 +28,7 @@ describe('saml 2.0', function () {
     var isValid = utils.isValidSignature(signedAssertion, options.cert);
     assert.equal(true, isValid);
 
-    
+
     var nameIdentifier = utils.getNameID(signedAssertion);
     assert.equal('foo', nameIdentifier.textContent);
     assert.equal('urn:oasis:names:tc:SAML:1.1:nameid-format:unspecified', nameIdentifier.getAttribute('Format'));
@@ -70,7 +70,7 @@ describe('saml 2.0', function () {
     };
 
     var signedAssertion = saml.create(options);
-    
+
     var isValid = utils.isValidSignature(signedAssertion, options.cert);
     assert.equal(true, isValid);
 
@@ -94,15 +94,15 @@ describe('saml 2.0', function () {
         'http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name': 'Foo Bar',
         'http://example.org/claims/testemptyarray': [], // should dont include empty arrays
         'http://example.org/claims/testaccent': 'fóo', // should supports accents
-        'http://attributes/boolean': true, 
-        'http://attributes/booleanNegative': false, 
-        'http://attributes/number': 123, 
+        'http://attributes/boolean': true,
+        'http://attributes/booleanNegative': false,
+        'http://attributes/number': 123,
         'http://undefinedattribute/ws/com.com': undefined
       }
     };
 
     var signedAssertion = saml.create(options);
-    
+
     var isValid = utils.isValidSignature(signedAssertion, options.cert);
     assert.equal(true, isValid);
 
@@ -136,26 +136,26 @@ describe('saml 2.0', function () {
         'http://example.org/claims/testemptyarray': [], // should dont include empty arrays
         'testaccent': 'fóo', // should supports accents
         'urn:test:1:2:3': true,
-        '123~oo': 123, 
+        '123~oo': 123,
         'http://undefinedattribute/ws/com.com': undefined
       }
     };
 
     var signedAssertion = saml.create(options);
-    
+
     var isValid = utils.isValidSignature(signedAssertion, options.cert);
     assert.equal(true, isValid);
 
     var attributes = utils.getAttributes(signedAssertion);
     assert.equal(5, attributes.length);
     assert.equal('http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress', attributes[0].getAttribute('Name'));
-    assert.equal('urn:oasis:names:tc:SAML:2.0:attrname-format:uri', attributes[0].getAttribute('NameFormat'));    
+    assert.equal('urn:oasis:names:tc:SAML:2.0:attrname-format:uri', attributes[0].getAttribute('NameFormat'));
     assert.equal('foo@bar.com', attributes[0].textContent);
     assert.equal('http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name', attributes[1].getAttribute('Name'));
-    assert.equal('urn:oasis:names:tc:SAML:2.0:attrname-format:uri', attributes[1].getAttribute('NameFormat'));    
+    assert.equal('urn:oasis:names:tc:SAML:2.0:attrname-format:uri', attributes[1].getAttribute('NameFormat'));
     assert.equal('Foo Bar', attributes[1].textContent);
     assert.equal('testaccent', attributes[2].getAttribute('Name'));
-    assert.equal('urn:oasis:names:tc:SAML:2.0:attrname-format:basic', attributes[2].getAttribute('NameFormat'));    
+    assert.equal('urn:oasis:names:tc:SAML:2.0:attrname-format:basic', attributes[2].getAttribute('NameFormat'));
     assert.equal('xs:string', attributes[2].firstChild.getAttribute('xsi:type'));
     assert.equal('fóo', attributes[2].textContent);
     assert.equal('urn:test:1:2:3', attributes[3].getAttribute('Name'));
@@ -163,7 +163,7 @@ describe('saml 2.0', function () {
     assert.equal('xs:boolean', attributes[3].firstChild.getAttribute('xsi:type'));
     assert.equal('true', attributes[3].textContent);
     assert.equal('123~oo', attributes[4].getAttribute('Name'));
-    assert.equal('urn:oasis:names:tc:SAML:2.0:attrname-format:unspecified', attributes[4].getAttribute('NameFormat'));    
+    assert.equal('urn:oasis:names:tc:SAML:2.0:attrname-format:unspecified', attributes[4].getAttribute('NameFormat'));
     assert.equal('xs:double', attributes[4].firstChild.getAttribute('xsi:type'));
     assert.equal('123', attributes[4].textContent);
   });
@@ -178,14 +178,14 @@ describe('saml 2.0', function () {
         'http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name': 'Foo Bar',
         'http://example.org/claims/testemptyarray': [], // should dont include empty arrays
         'http://example.org/claims/testaccent': 'fóo', // should supports accents
-        'http://attributes/boolean': true, 
-        'http://attributes/number': 123, 
+        'http://attributes/boolean': true,
+        'http://attributes/number': 123,
         'http://undefinedattribute/ws/com.com': undefined
       }
     };
 
     var signedAssertion = saml.create(options);
-    
+
     var isValid = utils.isValidSignature(signedAssertion, options.cert);
     assert.equal(true, isValid);
 
@@ -218,32 +218,32 @@ describe('saml 2.0', function () {
         'http://example.org/claims/testemptyarray': [], // should dont include empty arrays
         'testaccent': 'fóo', // should supports accents
         'urn:test:1:2:3': true,
-        '123~oo': 123, 
+        '123~oo': 123,
         'http://undefinedattribute/ws/com.com': undefined
       }
     };
 
     var signedAssertion = saml.create(options);
-    
+
     var isValid = utils.isValidSignature(signedAssertion, options.cert);
     assert.equal(true, isValid);
 
     var attributes = utils.getAttributes(signedAssertion);
     assert.equal(5, attributes.length);
     assert.equal('http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress', attributes[0].getAttribute('Name'));
-    assert.equal('', attributes[0].getAttribute('NameFormat'));    
+    assert.equal('', attributes[0].getAttribute('NameFormat'));
     assert.equal('foo@bar.com', attributes[0].textContent);
     assert.equal('http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name', attributes[1].getAttribute('Name'));
-    assert.equal('', attributes[1].getAttribute('NameFormat'));    
+    assert.equal('', attributes[1].getAttribute('NameFormat'));
     assert.equal('Foo Bar', attributes[1].textContent);
     assert.equal('testaccent', attributes[2].getAttribute('Name'));
-    assert.equal('', attributes[2].getAttribute('NameFormat'));    
+    assert.equal('', attributes[2].getAttribute('NameFormat'));
     assert.equal('fóo', attributes[2].textContent);
     assert.equal('urn:test:1:2:3', attributes[3].getAttribute('Name'));
     assert.equal('', attributes[3].getAttribute('NameFormat'));
     assert.equal('true', attributes[3].textContent);
     assert.equal('123~oo', attributes[4].getAttribute('Name'));
-    assert.equal('', attributes[4].getAttribute('NameFormat'));    
+    assert.equal('', attributes[4].getAttribute('NameFormat'));
     assert.equal('123', attributes[4].textContent);
   });
 
@@ -257,26 +257,26 @@ describe('saml 2.0', function () {
         'http://example.org/claims/testemptyarray': [], // should dont include empty arrays
         'arrayAttribute': [ 'foo', undefined, 'bar'],
         'urn:test:1:2:3': true,
-        '123~oo': 123, 
+        '123~oo': 123,
         'http://undefinedattribute/ws/com.com': undefined
       }
     };
 
     var signedAssertion = saml.create(options);
-    
+
     var isValid = utils.isValidSignature(signedAssertion, options.cert);
     assert.equal(true, isValid);
 
     var attributes = utils.getAttributes(signedAssertion);
     assert.equal(5, attributes.length);
     assert.equal('http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress', attributes[0].getAttribute('Name'));
-    assert.equal('urn:oasis:names:tc:SAML:2.0:attrname-format:uri', attributes[0].getAttribute('NameFormat'));    
+    assert.equal('urn:oasis:names:tc:SAML:2.0:attrname-format:uri', attributes[0].getAttribute('NameFormat'));
     assert.equal('foo@bar.com', attributes[0].textContent);
     assert.equal('http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name', attributes[1].getAttribute('Name'));
-    assert.equal('urn:oasis:names:tc:SAML:2.0:attrname-format:uri', attributes[1].getAttribute('NameFormat'));    
+    assert.equal('urn:oasis:names:tc:SAML:2.0:attrname-format:uri', attributes[1].getAttribute('NameFormat'));
     assert.equal('Foo Bar', attributes[1].textContent);
     assert.equal('arrayAttribute', attributes[2].getAttribute('Name'));
-    assert.equal('urn:oasis:names:tc:SAML:2.0:attrname-format:basic', attributes[2].getAttribute('NameFormat'));    
+    assert.equal('urn:oasis:names:tc:SAML:2.0:attrname-format:basic', attributes[2].getAttribute('NameFormat'));
     assert.equal('xs:string', attributes[2].firstChild.getAttribute('xsi:type'));
     assert.equal(2, attributes[2].childNodes.length);
     assert.equal('foo', attributes[2].childNodes[0].textContent);
@@ -287,7 +287,7 @@ describe('saml 2.0', function () {
     assert.equal('xs:boolean', attributes[3].firstChild.getAttribute('xsi:type'));
     assert.equal('true', attributes[3].textContent);
     assert.equal('123~oo', attributes[4].getAttribute('Name'));
-    assert.equal('urn:oasis:names:tc:SAML:2.0:attrname-format:unspecified', attributes[4].getAttribute('NameFormat'));    
+    assert.equal('urn:oasis:names:tc:SAML:2.0:attrname-format:unspecified', attributes[4].getAttribute('NameFormat'));
     assert.equal('xs:double', attributes[4].firstChild.getAttribute('xsi:type'));
     assert.equal('123', attributes[4].textContent);
   });
@@ -312,7 +312,7 @@ describe('saml 2.0', function () {
     var isValid = utils.isValidSignature(signedAssertion, options.cert);
     assert.equal(true, isValid);
 
-    
+
     var nameIdentifier = utils.getNameID(signedAssertion);
     assert.equal('foo', nameIdentifier.textContent);
     assert.equal('urn:oasis:names:tc:SAML:1.1:nameid-format:unspecified', nameIdentifier.getAttribute('Format'));
@@ -355,10 +355,10 @@ describe('saml 2.0', function () {
     };
 
     var signedAssertion = saml.create(options);
-    
+
     var isValid = utils.isValidSignature(signedAssertion, options.cert);
     assert.equal(true, isValid);
-    
+
     var doc = new xmldom.DOMParser().parseFromString(signedAssertion);
     var signature = doc.documentElement.getElementsByTagName('Signature');
 
@@ -381,10 +381,10 @@ describe('saml 2.0', function () {
     };
 
     var signedAssertion = saml.create(options);
-    
+
     var isValid = utils.isValidSignature(signedAssertion, options.cert);
     assert.equal(true, isValid);
-    
+
     var doc = new xmldom.DOMParser().parseFromString(signedAssertion);
     var signature = doc.documentElement.getElementsByTagName(options.signatureNamespacePrefix + ':Signature');
     assert.equal('saml:Conditions', signature[0].previousSibling.nodeName);
@@ -406,10 +406,10 @@ describe('saml 2.0', function () {
     };
 
     var signedAssertion = saml.create(options);
-    
+
     var isValid = utils.isValidSignature(signedAssertion, options.cert);
     assert.equal(true, isValid);
-    
+
     var doc = new xmldom.DOMParser().parseFromString(signedAssertion);
     var signature = doc.documentElement.getElementsByTagName(options.signatureNamespacePrefix + ':Signature');
     assert.equal('saml:Conditions', signature[0].previousSibling.nodeName);
@@ -431,10 +431,10 @@ describe('saml 2.0', function () {
     };
 
     var signedAssertion = saml.create(options);
-    
+
     var isValid = utils.isValidSignature(signedAssertion, options.cert);
     assert.equal(true, isValid);
-    
+
     var doc = new xmldom.DOMParser().parseFromString(signedAssertion);
     var signature = doc.documentElement.getElementsByTagName('Signature');
     assert.equal('saml:Conditions', signature[0].previousSibling.nodeName);
@@ -457,10 +457,10 @@ describe('saml 2.0', function () {
     };
 
     var signedAssertion = saml.create(options);
-    
+
     var isValid = utils.isValidSignature(signedAssertion, options.cert);
     assert.equal(true, isValid);
-    
+
     var doc = new xmldom.DOMParser().parseFromString(signedAssertion);
     var audienceRestriction = doc.documentElement.getElementsByTagName('saml:AudienceRestriction');
     assert.equal(audienceRestriction.length, 0);
@@ -498,7 +498,7 @@ describe('saml 2.0', function () {
         if (err) return done(err);
 
         var encryptedData = utils.getEncryptedData(encrypted);
-        
+
         xmlenc.decrypt(encryptedData.toString(), { key: fs.readFileSync(__dirname + '/test-auth0.key')}, function(err, decrypted) {
           if (err) return done(err);
           var isValid = utils.isValidSignature(decrypted, options.cert);
@@ -526,7 +526,7 @@ describe('saml 2.0', function () {
         if (err) return done(err);
 
         var encryptedData = utils.getEncryptedData(encrypted);
-        
+
         xmlenc.decrypt(encryptedData.toString(), { key: fs.readFileSync(__dirname + '/test-auth0.key')}, function(err, decrypted) {
           if (err) return done(err);
 
@@ -546,7 +546,41 @@ describe('saml 2.0', function () {
         });
       });
     });
-    
+
+    it('should transform assertion with AuthenticationContextDeclaration extension', function (done) {
+      const AC_NAMESPACE = 'urn:oasis:names:tc:SAML:2.0:ac:classes:PasswordProtectedTransport';
+      const options = {
+        cert: fs.readFileSync(__dirname + '/test-auth0.pem'),
+        key: fs.readFileSync(__dirname + '/test-auth0.key'),
+        issuer: 'urn:issuer',
+        lifetimeInSeconds: 600,
+        audiences: 'urn:myapp',
+        nameIdentifier:       'foo',
+        authnContextClassRef: 'urn:oasis:names:tc:SAML:2.0:ac:classes:PasswordProtectedTransport',
+        transformAssertion: function(assertion) {
+          var authnContext = assertion.getElementsByTagName('saml:AuthnContext')[0];
+          var authnContextDecl = assertion.createElementNS('urn:oasis:names:tc:SAML:2.0:assertion', 'saml:AuthnContextDecl');
+          authnContext.appendChild(authnContextDecl);
+          var authnContextDeclaration = assertion.createElementNS(AC_NAMESPACE, 'ac:AuthenticationContextDeclaration');
+          authnContextDecl.appendChild(authnContextDeclaration);
+          var extension = assertion.createElementNS(AC_NAMESPACE, 'ac:Extension');
+          authnContextDeclaration.appendChild(extension);
+          var fooExtension = assertion.createElementNS('https://example.com/extension', 'foo:Context');
+          fooExtension.setAttribute('bar', 'test');
+          extension.appendChild(fooExtension);
+        }
+      };
+
+      const signedAssertion = saml.create(options);
+      const isValid = utils.isValidSignature(signedAssertion, options.cert);
+      assert.equal(true, isValid);
+
+      const doc = new xmldom.DOMParser().parseFromString(signedAssertion);
+      const el = doc.documentElement.getElementsByTagName('foo:Context')[0];
+      assert.equal('test', el.getAttribute('bar'));
+      done();
+    });
+
   });
 
 });
