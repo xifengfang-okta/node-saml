@@ -2,7 +2,7 @@
   "name": "saml",
   "version": "0.12.5",
   "devDependencies": {
-    "mocha": "*",
+    "mocha": "^6.0.2",
     "should": "~13.2.3"
   },
   "main": "./lib",
